@@ -4,9 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+"dev": "react-scripts start",
+"start": "serve -s build",
+"build": "react-scripts build",
+"test": "react-scripts test --env=jsdom",
+"eject": "react-scripts eject",
+"heroku-postbuild": "npm run build"
+},
   "keywords": [
     "example",
     "heroku"
@@ -28,6 +32,7 @@
     "method-override": "^3.0.0",
     "mongoose": "^5.9.4",
     "nodemailer": "^6.4.6",
+    "serve": "^11.3.0",
     "stripe": "^8.32.0",
     "uuid": "^7.0.2"
   },
