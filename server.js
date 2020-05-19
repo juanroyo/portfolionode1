@@ -48,12 +48,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(cors());
-
+app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
-  res.json("hola")
-    });
-
+    res.render('index');
+});
 
 //-------------CART----------------
 app.post("/cart", (req, res) => {
