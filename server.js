@@ -33,23 +33,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(cors());
 
-const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(url);
 
-async function run() {
-    try {
-        await client.connect();
-        console.log("Connected correctly to server");
+app.get('/', function(req, res) {
+  res.json("hola")
+    });
+  });
+});
 
-    } catch (err) {
-        console.log(err.stack);
-    }
-    finally {
-        await client.close();
-    }
-}
-
-run().catch(console.dir);
 //-------------CART----------------
 app.post("/cart", (req, res) => {
 
@@ -115,7 +105,7 @@ app.post("/cart", (req, res) => {
             console.log('Email sent: ' + info.response);
           }
         })
-      }).then(function(err, db) {
+      }).then(MongoClient.connect(url, function(err, db) {
           if (err) throw err;
           var dbo = db.db("mydb");
 
@@ -130,12 +120,12 @@ app.post("/cart", (req, res) => {
             res.json(result);
             db.close();
           })
-        }).then(result =>  res.status(200).json(result))
+        })).then(result =>  res.status(200).json(result))
      .catch(err => console.log(err))
 });
 
 app.get('/cart', function(req, res) {
-
+  MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("mydb");
     dbo.collection("Albums").find().toArray(function(err, result) {
@@ -144,12 +134,12 @@ app.get('/cart', function(req, res) {
       res.json(result);
       db.close();
     });
-
+  });
 });
 
 
 app.get('/cart/:id', function(req, res) {
-
+  MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("mydb");
     var albumid = req.params._id;
@@ -159,7 +149,7 @@ app.get('/cart/:id', function(req, res) {
       res.json(result);
       db.close();
     });
-
+  });
 });
 
 //--------CONTACT POST-------------
@@ -192,7 +182,7 @@ app.post('/contact', function(req, res) {
      });
    }
    sendEmail()
-      {
+     MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     console.log("hola" + req.body);
     var dbo = db.db("mydb");
@@ -207,13 +197,13 @@ app.post('/contact', function(req, res) {
       db.close();
 
 })
-}
+})
 
 });
 
 //-------------SHOP-----------------
 app.get('/shop', function(req, res) {
-
+  MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("mydb");
 
@@ -223,10 +213,10 @@ app.get('/shop', function(req, res) {
       res.json(result);
       db.close();
     });
-  
+  });
 });
 app.get('/offers', function(req, res) {
-
+  MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("mydb");
 
@@ -236,12 +226,12 @@ app.get('/offers', function(req, res) {
       res.json(result);
       db.close();
     });
-
+  });
 });
 
 
 app.get('/shop/:id', function(req, res) {
-
+  MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("mydb");
 
@@ -251,11 +241,11 @@ app.get('/shop/:id', function(req, res) {
       res.json(result);
       db.close();
     });
-
+  });
 });
 
 app.get('/login', function(req, res) {
-
+  MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("mydb");
 
@@ -265,15 +255,29 @@ app.get('/login', function(req, res) {
       res.json(result);
       db.close();
     });
-
+  });
 });
 
 
 app.use(router);
-
+const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(url);
 const dbName = "test";
 
+async function run() {
+    try {
+        await client.connect();
+        console.log("Connected correctly to server");
 
+    } catch (err) {
+        console.log(err.stack);
+    }
+    finally {
+        await client.close();
+    }
+}
+
+run().catch(console.dir);
 app.listen(PORT, function(){
 console.log('Back is running')
 });
