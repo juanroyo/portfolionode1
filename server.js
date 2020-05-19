@@ -14,7 +14,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcrypt')
-
+const PORT = process.env.PORT || 5000;
 const stripe = require("stripe")("sk_test_qi9RJCWRFOU6Ry4X8m1kvNad002D09YcIO")
 const { v4: uuidv4 } = require('uuid');
 const cors = require("cors")
@@ -274,6 +274,6 @@ async function run() {
 }
 
 run().catch(console.dir);
-app.listen(process.env.PORT || 5000, function(){
+app.listen(PORT, function(){
 console.log('Back is running')
 });

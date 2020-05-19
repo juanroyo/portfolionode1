@@ -4,13 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "react-scripts start",
-    "start": "serve -s build",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
-},
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [
     "example",
     "heroku"
@@ -41,5 +37,6 @@
   },
   "engines": {
     "node": "12.16.1"
+    "node": "6.13.4"
   }
 }
