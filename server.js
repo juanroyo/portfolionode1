@@ -29,7 +29,7 @@ const connectDB = async () => {
   await mongoose.connect(url, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    connectWithNoPrimary: true,
+    connectWithNoPrimary: false,
     connectTimeoutMS: 30000
   });
   console.log('db connected..!');
@@ -238,6 +238,6 @@ app.get('/login', function(req, res) {
 app.use(router);
 
 
-app.listen(PORT, function(){
+/*app.listen(PORT, function(){
 console.log('Back is running')
-});
+});*/
