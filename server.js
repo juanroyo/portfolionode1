@@ -37,7 +37,7 @@ const connectDB = async () => {
 connectDB()
 var serveroption = {
   useUnifiedTopology: true,
-
+  useNewUrlParser: true,
   connectWithNoPrimary: false,
   connectTimeoutMS: 30000
 }
@@ -47,7 +47,6 @@ app.use(bodyParser.json({ type: 'application/json' }));
 app.use(cors());
 
 
-app.use('/api', createProxyMiddleware({ target: 'https://zylenstudio.herokuapp.com', changeOrigin: true }));
 app.set('view engine', 'ejs');
 
 //-------------CART----------------
