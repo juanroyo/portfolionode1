@@ -45,7 +45,10 @@ app.use(cors());
 
 
 app.use('/api', createProxyMiddleware({ target: 'https://zylenstudio.herokuapp.com', changeOrigin: true }));
-
+app.set('view engine', 'ejs');
+app.get('/', function (req, res) {
+  res.render('index', { title: 'Hey', message: 'Hello there!'});
+});
 //-------------CART----------------
 app.post("/cart", (req, res) => {
 
