@@ -55,14 +55,14 @@ app.set('view engine', 'ejs');
 app.all('/', function(req, res, next) {
    res.header("Access-Control-Allow-Origin", "*");
    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-   next()
+
  });
 
 //-------------CART----------------
 app.post("/cart", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next()
+
 
      const {product, token} = req.body;
      console.log("PRODUCT", product.title);
@@ -151,7 +151,7 @@ app.post("/cart", (req, res) => {
 app.post('/contact', function(req, res) {
   res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next()
+
   function sendEmail() {
     var emailAddress = req.body.email;
     var message =  req.body.textarea;
@@ -205,7 +205,7 @@ MongoClient.connect(url, function(err, db) {
 app.get('/shop', function(req, res) {
   res.header("Access-Control-Allow-Origin", "*");
       res.header("Access-Control-Allow-Headers", "X-Requested-With");
-      next()
+
     var dbo = db.db("mydb");
 
     dbo.collection("Albums").find().toArray(function(err, result) {
@@ -219,7 +219,7 @@ app.get('/shop', function(req, res) {
 app.get('/offers', function(req, res) {
   res.header("Access-Control-Allow-Origin", "*");
       res.header("Access-Control-Allow-Headers", "X-Requested-With");
-      next()
+
     var dbo = db.db("mydb");
 
     dbo.collection("Offers").find().toArray(function(err, result) {
@@ -248,7 +248,7 @@ app.get('/shop/:id', function(req, res) {
 app.get('/login', function(req, res) {
   res.header("Access-Control-Allow-Origin", "*");
       res.header("Access-Control-Allow-Headers", "X-Requested-With");
-      next()
+
     var dbo = db.db("mydb");
 
     dbo.collection("Payments").find({}, { projection: { _id: 1, email: 1, products: 1,  total: 1 } }).toArray(function(err, result) {
