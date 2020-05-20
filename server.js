@@ -37,7 +37,7 @@ const connectDB = async () => {
 connectDB()
 var serveroption = {
   useUnifiedTopology: true,
-  useNewUrlParser: true,
+
   connectWithNoPrimary: false,
   connectTimeoutMS: 30000
 }
