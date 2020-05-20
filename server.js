@@ -27,7 +27,7 @@ const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/te
 mongoose.connect(url, {
   useNewUrlParser: true
 });
-run().catch(console.dir);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }));
