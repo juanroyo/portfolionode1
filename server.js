@@ -18,25 +18,15 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
 const router = express.Router();
 //var url = "mongodb://localhost:27017/";
 app.set('db', require('./models.js'));
 
-const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(url);
-
-async function run() {
-    try {
-        await client.connect();
-        console.log("Connected correctly to server");
-
-    } catch (err) {
-        console.log(err.stack);
-    }
-    finally {
-        await client.close();
-    }
-}
+const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority&socketTimeoutMS=360000&connectTimeoutMS=360000";
+mongoose.connect(url, {
+  useNewUrlParser: true
+});
 run().catch(console.dir);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
