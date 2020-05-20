@@ -1,9 +1,4 @@
 
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
-const stripePublicKey = process.env.STRIPE_PUBLIC_KEY;
 const emailp = process.env.EMAILP;
 const express = require('express')
 const app = express()
@@ -42,7 +37,7 @@ async function run() {
         await client.close();
     }
 }
-
+run().catch(console.dir);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }));
@@ -244,7 +239,7 @@ app.get('/login', function(req, res) {
 
 app.use(router);
 
-run().catch(console.dir);
+
 app.listen(PORT, function(){
 console.log('Back is running')
 });
