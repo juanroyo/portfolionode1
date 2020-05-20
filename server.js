@@ -114,7 +114,7 @@ app.post("/cart", (req, res) => {
             console.log('Email sent: ' + info.response);
           }
         })
-      }).then(MongoClient.connect(url, serveroption,
+      }).then(MongoClient.connect(MONGODB_URI, serveroption,
 
        function(err, db) {
           if (err) throw err;
@@ -167,7 +167,7 @@ app.post('/contact', function(req, res) {
      });
    }
    sendEmail()
-     MongoClient.connect(url, serveroption,
+     MongoClient.connect(MONGODB_URI, serveroption,
         function(err, db) {
     if (err) throw err;
     console.log("hola" + req.body);
@@ -188,7 +188,7 @@ app.post('/contact', function(req, res) {
 });
 
 //-------------SHOP-----------------
-MongoClient.connect(url, serveroption, function(err, db) {
+MongoClient.connect(MONGODB_URI, serveroption, function(err, db) {
   if (err) throw err;
 app.get('/shop', function(req, res) {
 
