@@ -21,7 +21,7 @@ const cors = require("cors")
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
-
+const { createProxyMiddleware } = require('http-proxy-middleware');
 const MongoClient = require('mongodb').MongoClient;
 const router = express.Router();
 //var url = "mongodb://localhost:27017/";
@@ -29,7 +29,6 @@ app.set('db', require('./models.js'));
 
 const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(url);
-const dbName = "test";
 
 async function run() {
     try {
@@ -47,22 +46,13 @@ async function run() {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }));
-app.use(cors({
-  origin: 'https://zylenstudio.herokuapp.com'
-}));
+app.use(cors());
 app.set('view engine', 'ejs');
 
-app.all('/', function(req, res, next) {
-   res.header("Access-Control-Allow-Origin", "*");
-   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-
- });
+app.use('/api', createProxyMiddleware({ target: 'https://zylenstudio.herokuapp.com', changeOrigin: true }));
 
 //-------------CART----------------
 app.post("/cart", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-
 
      const {product, token} = req.body;
      console.log("PRODUCT", product.title);
@@ -149,9 +139,6 @@ app.post("/cart", (req, res) => {
 
 //--------CONTACT POST-------------
 app.post('/contact', function(req, res) {
-  res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-
   function sendEmail() {
     var emailAddress = req.body.email;
     var message =  req.body.textarea;
@@ -203,8 +190,6 @@ app.post('/contact', function(req, res) {
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
 app.get('/shop', function(req, res) {
-  res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
     var dbo = db.db("mydb");
 
@@ -217,8 +202,6 @@ app.get('/shop', function(req, res) {
 
 });
 app.get('/offers', function(req, res) {
-  res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
     var dbo = db.db("mydb");
 
@@ -246,8 +229,6 @@ app.get('/shop/:id', function(req, res) {
 });
 
 app.get('/login', function(req, res) {
-  res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
     var dbo = db.db("mydb");
 
