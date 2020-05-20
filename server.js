@@ -23,10 +23,10 @@ const router = express.Router();
 //var url = "mongodb://localhost:27017/";
 app.set('db', require('./models.js'));
 
-const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
+const MONGODB_URI = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
 
 const connectDB = async () => {
-  await mongoose.connect(url, {
+  await mongoose.connect(MONGODB_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     connectWithNoPrimary: false,
@@ -36,7 +36,7 @@ const connectDB = async () => {
 };
 connectDB()
 var serveroption = {
-  
+  useUnifiedTopology: true,
   useNewUrlParser: true,
   connectWithNoPrimary: false,
   connectTimeoutMS: 30000
