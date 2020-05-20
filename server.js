@@ -25,7 +25,8 @@ app.set('db', require('./models.js'));
 
 const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority&socketTimeoutMS=360000&connectTimeoutMS=360000";
 mongoose.connect(url, {
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 
 app.use(bodyParser.json());
