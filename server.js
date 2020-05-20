@@ -35,13 +35,19 @@ const connectDB = async () => {
   console.log('db connected..!');
 };
 connectDB()
+var serveroption = {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  connectWithNoPrimary: false,
+  connectTimeoutMS: 30000
+}
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(cors());
 
 
-
+app.use('/api', createProxyMiddleware({ target: 'https://zylenstudio.herokuapp.com', changeOrigin: true }));
 app.set('view engine', 'ejs');
 
 //-------------CART----------------
@@ -109,7 +115,9 @@ app.post("/cart", (req, res) => {
             console.log('Email sent: ' + info.response);
           }
         })
-      }).then(MongoClient.connect(url, function(err, db) {
+      }).then(MongoClient.connect(url, serveroption,
+
+       function(err, db) {
           if (err) throw err;
           var dbo = db.db("mydb");
 
@@ -160,7 +168,8 @@ app.post('/contact', function(req, res) {
      });
    }
    sendEmail()
-     MongoClient.connect(url, function(err, db) {
+     MongoClient.connect(url, serveroption,
+        function(err, db) {
     if (err) throw err;
     console.log("hola" + req.body);
     var dbo = db.db("mydb");
@@ -180,7 +189,7 @@ app.post('/contact', function(req, res) {
 });
 
 //-------------SHOP-----------------
-MongoClient.connect(url, function(err, db) {
+MongoClient.connect(url, serveroption, function(err, db) {
   if (err) throw err;
 app.get('/shop', function(req, res) {
 
