@@ -23,14 +23,16 @@ const router = express.Router();
 //var url = "mongodb://localhost:27017/";
 app.set('db', require('./models.js'));
 
+const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
 const MONGODB_URI = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
-
+const db = process.env.MONGODB_URI;
 const connectDB = async () => {
-  await mongoose.connect(MONGODB_URI, {
+  await mongoose.connect(db, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     connectWithNoPrimary: false,
-    connectTimeoutMS: 30000
+    connectTimeoutMS: 30000,
+    useFindAndModify: false
   });
   console.log('db connected..!');
 };
@@ -44,7 +46,11 @@ var serveroption = {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }));
-app.use(cors());
+corsOptions = {
+  origin: "https://zylenstudio.herokuapp.com",
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 
 
 app.set('view engine', 'ejs');
@@ -114,7 +120,7 @@ app.post("/cart", (req, res) => {
             console.log('Email sent: ' + info.response);
           }
         })
-      }).then(MongoClient.connect(MONGODB_URI, serveroption,
+      }).then(MongoClient.connect(url , serveroption,
 
        function(err, db) {
           if (err) throw err;
@@ -167,7 +173,7 @@ app.post('/contact', function(req, res) {
      });
    }
    sendEmail()
-     MongoClient.connect(MONGODB_URI, serveroption,
+     MongoClient.connect(url , serveroption,
         function(err, db) {
     if (err) throw err;
     console.log("hola" + req.body);
@@ -188,7 +194,7 @@ app.post('/contact', function(req, res) {
 });
 
 //-------------SHOP-----------------
-MongoClient.connect(MONGODB_URI, serveroption, function(err, db) {
+MongoClient.connect(url , serveroption, function(err, db) {
   if (err) throw err;
 app.get('/shop', function(req, res) {
 
