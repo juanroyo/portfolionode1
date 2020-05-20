@@ -29,7 +29,7 @@ const connectDB = async () => {
   await mongoose.connect(url, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    connectWithNoPrimary: false,
+    connectWithNoPrimary: true,
     connectTimeoutMS: 30000
   });
   console.log('db connected..!');
