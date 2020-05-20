@@ -28,7 +28,8 @@ const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/te
 const connectDB = async () => {
   await mongoose.connect(url, {
     useUnifiedTopology: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    connectWithNoPrimary: false
   });
   console.log('db connected..!');
 };
