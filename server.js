@@ -23,12 +23,15 @@ const router = express.Router();
 //var url = "mongodb://localhost:27017/";
 app.set('db', require('./models.js'));
 
-const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority&socketTimeoutMS=360000&connectTimeoutMS=360000";
-mongoose.connect(url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
 
+const connectDB = async () => {
+  await mongoose.connect(url, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+  });
+  console.log('db connected..!');
+};
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }));
