@@ -41,7 +41,7 @@ app.use(bodyParser.json({ type: 'application/json' }));
 app.use(cors());
 
 
-app.use('/api', createProxyMiddleware({ target: 'https://zylenstudio.herokuapp.com', changeOrigin: true }));
+
 app.set('view engine', 'ejs');
 
 //-------------CART----------------
@@ -238,6 +238,6 @@ app.get('/login', function(req, res) {
 app.use(router);
 
 
-/*app.listen(PORT, function(){
+app.listen(PORT, function(){
 console.log('Back is running')
-});*/
+});
