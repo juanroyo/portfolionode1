@@ -27,8 +27,6 @@ async function sendEmail(req, res) {
  }
 app.post('/contact', sendEmail
 
-
-
         function(err, db) {
     if (err) throw err;
     console.log("hola" + req.body);
@@ -37,7 +35,7 @@ app.post('/contact', sendEmail
           email: req.body.email,
           textarea: req.body.textarea
           };
-    dbo.collection("Messages").insertOne(myobj, function(err, result) {
+  return await dbo.collection("Messages").insertOne(myobj, function(err, result) {
       if (err) throw err;
       console.log("1 document inserted");
       res.json(result);
@@ -52,7 +50,7 @@ app.post('/contact', sendEmail
 async function shopPost(req, res) {
   var dbo = db.db("mydb");
 
-  dbo.collection("Albums").find({}).toArray(function(err, result) {
+  return await dbo.collection("Albums").find({}).toArray(function(err, result) {
     if (err) throw err;
 
     res.json(result);
@@ -65,7 +63,7 @@ async function offersGet(req, res) {
 
     var dbo = db.db("mydb");
 
-    dbo.collection("Offers").find({}).toArray(function(err, result) {
+  return await dbo.collection("Offers").find({}).toArray(function(err, result) {
       if (err) throw err;
 
       res.json(result);
@@ -77,7 +75,7 @@ app.get('/offers', offersGet);
 async function loginGet(req, res) {
   var dbo = db.db("mydb");
 
-  dbo.collection("Payments").find({}, { projection: { _id: 1, email: 1, products: 1,  total: 1 } }).toArray(function(err, result) {
+  return await dbo.collection("Payments").find({}, { projection: { _id: 1, email: 1, products: 1,  total: 1 } }).toArray(function(err, result) {
     if (err) throw err;
 
     res.json(result);
