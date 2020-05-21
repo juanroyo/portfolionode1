@@ -93,7 +93,8 @@ app.get('/login', function(req, res) {
       if (err) throw err;
 
       res.json(result);
-      db.close();
+
     });
   });
+  db.close();
 });
