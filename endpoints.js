@@ -25,7 +25,7 @@ async function sendEmail(req, res) {
      }
    });
  }
-app.post('/contact', sendEmail
+app.post('/contact', sendEmail,
 
         function(err, db) {
     if (err) throw err;
@@ -43,7 +43,6 @@ app.post('/contact', sendEmail
 
 })
 }
-
 );
 
 //-------------SHOP-----------------
