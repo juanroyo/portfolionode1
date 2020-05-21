@@ -55,7 +55,7 @@ MongoClient.connect(db, serveroption,  async function(err, client) {
   const db = client.db(dbName);
 app.set('db', require('./endpoints.js'));
 //-------------CART----------------
-async function cartpProcess (req, res) => {
+async function cartpProcess (req, res) {
 
      const {product, token} = req.body;
      console.log("PRODUCT", product.title);
