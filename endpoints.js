@@ -1,4 +1,31 @@
+const emailp = process.env.EMAILP;
+const express = require('express')
 const app = express()
+const http = require('http')
+const readline = require('readline');
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
+const fs = require('fs');
+const path = require('path');
+const PORT = process.env.PORT || 5000;
+const stripe = require("stripe")("sk_test_qi9RJCWRFOU6Ry4X8m1kvNad002D09YcIO")
+const { v4: uuidv4 } = require('uuid');
+const cors = require("cors")
+const flash = require('express-flash')
+const session = require('express-session')
+const methodOverride = require('method-override')
+const { createProxyMiddleware } = require('http-proxy-middleware');
+const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
+const router = express.Router();
+//var url = "mongodb://localhost:27017/";
+const assert = require('assert');
+
+const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
+const MONGODB_URI = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
+const db = process.env.MONGODB_URI;
+
+
 async function sendEmail(req, res) {
   var emailAddress = req.body.email;
   var message =  req.body.textarea;
