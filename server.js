@@ -57,7 +57,7 @@ MongoClient.connect(db, serveroption,  function(err, client) {
   });
 app.set('db', require('./endpoints.js'));
 //-------------CART----------------
-async function cartpProcess (req, res) {
+app.post("/cart", (req, res) => {
 
      const {product, token} = req.body;
      console.log("PRODUCT", product.title);
@@ -121,9 +121,7 @@ async function cartpProcess (req, res) {
             console.log('Email sent: ' + info.response);
           }
         })
-      }).then(
-
-       function(err, db) {
+      }).then(MongoClient.connect(url, function(err, db) {
           if (err) throw err;
           var dbo = db.db("mydb");
 
@@ -136,12 +134,11 @@ async function cartpProcess (req, res) {
             if (err) throw err;
             console.log(result)
             res.json(result);
-
+            db.close();
           })
-        }).then(result =>  res.status(200).json(result))
+        })).then(result =>  res.status(200).json(result))
      .catch(err => console.log(err))
-}
-app.post("/cart", cartpProcess);
+});
 
 async function sendEmail(req, res) {
   var emailAddress = req.body.email;
