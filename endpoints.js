@@ -1,3 +1,4 @@
+const app = express()
 async function sendEmail(req, res) {
   var emailAddress = req.body.email;
   var message =  req.body.textarea;
