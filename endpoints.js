@@ -1,17 +1,4 @@
-const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
-const dbName = 'mydb'
 
-MongoClient.connect(db, serveroption,  function(err, client) {
-  assert.equal(null, err);
-  console.log("Connected successfully to server");
-
-  const db = client.db(dbName);
-var serveroption = {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-  connectWithNoPrimary: false,
-  connectTimeoutMS: 30000
-}
 app.post('/contact', function(req, res) {
   function sendEmail() {
     var emailAddress = req.body.email;
@@ -57,13 +44,13 @@ app.post('/contact', function(req, res) {
       db.close();
 
 })
-})
+}
 
 });
 
 //-------------SHOP-----------------
 
-  if (err) throw err;
+
 app.get('/shop', function(req, res) {
 
     var dbo = db.db("mydb");
@@ -102,6 +89,4 @@ app.get('/login', function(req, res) {
       res.json(result);
 
     });
-  });
-  client.close();
   });
