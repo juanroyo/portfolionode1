@@ -49,21 +49,19 @@ app.post('/contact', sendEmail
 );
 
 //-------------SHOP-----------------
+async function shopPost(req, res) {
+  var dbo = db.db("mydb");
 
+  dbo.collection("Albums").find({}).toArray(function(err, result) {
+    if (err) throw err;
 
-app.get('/shop', function(req, res) {
+    res.json(result);
 
-    var dbo = db.db("mydb");
+  });
+}
 
-    dbo.collection("Albums").find({}).toArray(function(err, result) {
-      if (err) throw err;
-
-      res.json(result);
-
-    });
-
-});
-app.get('/offers', function(req, res) {
+app.get('/shop', shopPost);
+async function offersGet(req, res) {
 
     var dbo = db.db("mydb");
 
@@ -73,20 +71,18 @@ app.get('/offers', function(req, res) {
       res.json(result);
 
     });
+}
+app.get('/offers', offersGet);
 
-});
+async function loginGet(req, res) {
+  var dbo = db.db("mydb");
 
+  dbo.collection("Payments").find({}, { projection: { _id: 1, email: 1, products: 1,  total: 1 } }).toArray(function(err, result) {
+    if (err) throw err;
 
+    res.json(result);
 
-
-app.get('/login', function(req, res) {
-
-    var dbo = db.db("mydb");
-
-    dbo.collection("Payments").find({}, { projection: { _id: 1, email: 1, products: 1,  total: 1 } }).toArray(function(err, result) {
-      if (err) throw err;
-
-      res.json(result);
-
-    });
   });
+  }
+
+app.get('/login', loginGet);
