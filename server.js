@@ -48,7 +48,7 @@ var serveroption = {
   connectTimeoutMS: 30000
 }
 MongoClient.connect(db, serveroption,  async function(err, client) {
-  if (err) { throw err; }
+
   assert.equal(null, err);
   console.log("Connected successfully to server");
 
