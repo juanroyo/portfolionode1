@@ -204,7 +204,7 @@ app.get('/shop', function(req, res) {
       if (err) throw err;
 
       res.json(result);
-db.close();
+
     });
 
 });
