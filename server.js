@@ -24,7 +24,7 @@ const assert = require('assert');
 
 const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
 const MONGODB_URI = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
-const db = process.env.MONGODB_URI;
+
 
 
 
@@ -47,7 +47,7 @@ var serveroption = {
   connectWithNoPrimary: false,
   connectTimeoutMS: 30000
 }
-MongoClient.connect(db, serveroption,  function(err, client) {
+MongoClient.connect(MONGODB_URI, serveroption,  function(err, client) {
 
   assert.equal(null, err);
   console.log("Connected successfully to server");
