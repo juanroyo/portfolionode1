@@ -20,7 +20,7 @@ const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
 const router = express.Router();
 //var url = "mongodb://localhost:27017/";
-
+const assert = require('assert');
 
 const url = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
 const MONGODB_URI = "mongodb+srv://juanar:KELi1aO0zTS5pF1v@cluster0-axx5n.mongodb.net/test?retryWrites=true&w=majority";
@@ -47,13 +47,13 @@ var serveroption = {
   connectWithNoPrimary: false,
   connectTimeoutMS: 30000
 }
-MongoClient.connect(db, serveroption,  async function(err, client) {
+MongoClient.connect(db, serveroption,  function(err, client) {
 
   assert.equal(null, err);
   console.log("Connected successfully to server");
 
   const db = client.db(dbName);
-app.set('db', require('./endpoints.js'));
+  app.set('db', require('./endpoints.js'));
 //-------------CART----------------
 async function cartpProcess (req, res) {
 
