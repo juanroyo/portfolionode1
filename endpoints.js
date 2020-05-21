@@ -65,7 +65,7 @@ app.get('/shop', function(req, res) {
       if (err) throw err;
 
       res.json(result);
-db.close();
+
     });
 
 });
@@ -83,18 +83,7 @@ app.get('/offers', function(req, res) {
 });
 
 
-app.get('/shop/:id', function(req, res) {
 
-    var dbo = db.db("mydb");
-
-    dbo.collection("Albums").find().toArray(function(err, result) {
-      if (err) throw err;
-      console.log(result)
-      res.json(result);
-
-    });
-
-});
 
 app.get('/login', function(req, res) {
 
