@@ -53,6 +53,8 @@ MongoClient.connect(db, serveroption,  function(err, client) {
   console.log("Connected successfully to server");
 
   const db = client.db(dbName);
+  client.close();
+  });
 app.set('db', require('./endpoints.js'));
 //-------------CART----------------
 async function cartpProcess (req, res) {
@@ -226,5 +228,3 @@ async function loginGet(req, res) {
   }
 
 app.get('/login', loginGet);
-client.close();
-});
