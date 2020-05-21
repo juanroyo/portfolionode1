@@ -1,33 +1,33 @@
+async function sendEmail(req, res) {
+  var emailAddress = req.body.email;
+  var message =  req.body.textarea;
+  //var total = req.body.total;
+  console.log("this is the function!")
 
-app.post('/contact', function(req, res) {
-  function sendEmail() {
-    var emailAddress = req.body.email;
-    var message =  req.body.textarea;
-    //var total = req.body.total;
-    console.log("this is the function!")
-
-   var mail = nodemailer.createTransport({
-     service: 'gmail',
-     auth: {
-       user: 'ju.val.roy@gmail.com',
-       pass: 'Manolito.1'
+ var mail = nodemailer.createTransport({
+   service: 'gmail',
+   auth: {
+     user: 'ju.val.roy@gmail.com',
+     pass: 'Manolito.1'
+   }
+ });
+  var mailOptions = {
+     from:  emailAddress,
+     to: 'ju.val.roy@gmail.com',
+     subject: 'Sending Email using Node.js',
+     html: `<td><p>${message}</p></td><td><p>That was easy!${emailAddress}</p></td>`
+   }
+   mail.sendMail(mailOptions, function(error, info){
+     if (error) {
+       console.log(error);
+     } else {
+       console.log('Email sent: ' + info.response);
      }
    });
-    var mailOptions = {
-       from:  emailAddress,
-       to: 'ju.val.roy@gmail.com',
-       subject: 'Sending Email using Node.js',
-       html: `<td><p>${message}</p></td><td><p>That was easy!${emailAddress}</p></td>`
-     }
-     mail.sendMail(mailOptions, function(error, info){
-       if (error) {
-         console.log(error);
-       } else {
-         console.log('Email sent: ' + info.response);
-       }
-     });
-   }
-   sendEmail()
+ }
+app.post('/contact', sendEmail
+
+
 
         function(err, db) {
     if (err) throw err;
@@ -46,7 +46,7 @@ app.post('/contact', function(req, res) {
 })
 }
 
-});
+);
 
 //-------------SHOP-----------------
 
@@ -55,7 +55,7 @@ app.get('/shop', function(req, res) {
 
     var dbo = db.db("mydb");
 
-    dbo.collection("Albums").find().toArray(function(err, result) {
+    dbo.collection("Albums").find({}).toArray(function(err, result) {
       if (err) throw err;
 
       res.json(result);
@@ -67,7 +67,7 @@ app.get('/offers', function(req, res) {
 
     var dbo = db.db("mydb");
 
-    dbo.collection("Offers").find().toArray(function(err, result) {
+    dbo.collection("Offers").find({}).toArray(function(err, result) {
       if (err) throw err;
 
       res.json(result);
