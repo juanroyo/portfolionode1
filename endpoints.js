@@ -35,7 +35,7 @@ app.post('/contact', sendEmail,
           email: req.body.email,
           textarea: req.body.textarea
           };
-  return await dbo.collection("Messages").insertOne(myobj, function(err, result) {
+ dbo.collection("Messages").insertOne(myobj, function(err, result) {
       if (err) throw err;
       console.log("1 document inserted");
       res.json(result);
